@@ -40,7 +40,7 @@ if (strpos($_SESSION['perm'], 'x') !== false)
 		include '../config.php';
 	}
 	$user = $_SESSION['user'];
-	$sql="SELECT * FROM admin";
+	$sql="SELECT * FROM admin where username!='$user'";
 	$result=mysql_query($sql);
 ?>
 	<form action=""" method="POST">
