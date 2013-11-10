@@ -3,6 +3,7 @@ session_start();
 $logged = false;
 
 if(isset($_SESSION['logged']))
+<<<<<<< HEAD
 	if($_SESSION['logged']==true)
 	{
 		$logged=true;
@@ -15,6 +16,11 @@ if(isset($_SESSION['logged']))
 		{
 			header("Location:dashboard.php");
 		}
+=======
+	if($_SESSION['logged']==true){
+		$logged=true;
+		$user=$_SESSION['user'];
+>>>>>>> e0f4055f0ae336b88247f5fb7e05556f887e0034
 	}
 else $logged=false;
 
@@ -32,16 +38,22 @@ if($logged!=true){
 		$password = mysql_real_escape_string($password);
 		$sql="SELECT * FROM admin WHERE username='$username' and pass='$password'";
 		$result=mysql_query($sql);
+<<<<<<< HEAD
 		$row=mysql_fetch_array($result);
 
 		$count=mysql_num_rows($result);
 		if($count==1){
+=======
+
+		$count=mysql_num_rows($result);
+		if($count==1){
+			$row = mysql_fetch_array($result);
+>>>>>>> e0f4055f0ae336b88247f5fb7e05556f887e0034
 			$_SESSION['logged']=true;
 			$_SESSION['user']=$username;
 			$_SESSION['account']="admin";
 			$_SESSION['perm']=$row['permission'];
-			header("Location:admindashboard.php");
-
+ 	      	header("Location:admindashboard.php");
 		}
 
 		$sql="SELECT * FROM customer WHERE email='$username' and pass='$password'";
@@ -66,6 +78,7 @@ if($logged!=true){
 <head> 
 <title> Eletricity Billing Management System </title>
 <script src="js/jquery.js"></script>
+<<<<<<< HEAD
 <script>
 function prf(a)
 {
@@ -86,11 +99,15 @@ window.location = "logout.php";
 }
 </script>
 <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+=======
+<script src="bootstrap/dist/js/bootstrap.min.js"></script>
+
+<link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+>>>>>>> e0f4055f0ae336b88247f5fb7e05556f887e0034
 
 <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 
 </head>
-
 
 <body>
 <?php
@@ -124,14 +141,24 @@ window.location = "logout.php";
 <?php
     }else{
 
+<<<<<<< HEAD
     	echo "<span class=\"navbar-brand navbar-right\">Welcome $user  ".'<button type="button" class="btn btn-success" value="Click me" onclick="prf(\''.$_SESSION['account'].'\')">Dashboard</button>'.'  '.'<button type="button" class="btn btn-success" value="Click me" onclick="logout()">Sign out</button>'."</span>";
+=======
+    	echo "<span class=\"navbar-brand navbar-right\">Welcome $user </span>";
+>>>>>>> e0f4055f0ae336b88247f5fb7e05556f887e0034
     }
 ?>
         </div><!--/.navbar-collapse -->
       </div>
     </div>
 <?php
+<<<<<<< HEAD
 	
+=======
+	if($logged==true){
+    	echo "<button type=\"button\" class=\"btn btn-success\" style=\"float:right; margin-top: 52px;\" value=\"Click me\" onclick=\"window.location = 'logout.php'\">Sign out</button>";
+    }	
+>>>>>>> e0f4055f0ae336b88247f5fb7e05556f887e0034
 ?>
 <center>
 <img style="width:850px; padding-top: 75px;" src="images/bulb.jpg"/>
