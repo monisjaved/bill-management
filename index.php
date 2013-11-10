@@ -25,11 +25,12 @@ if($logged!=true){
 
 		$count=mysql_num_rows($result);
 		if($count==1){
+			$row = mysql_fetch_array($result);
 			$_SESSION['logged']=true;
 			$_SESSION['user']=$username;
 			$_SESSION['account']="admin";
-			header("Location:admin/index.php");
-
+			$_SESSION['perm']=$row['permission'];
+ 	      	header("Location:admindashboard.php");
 		}
 
 		$sql="SELECT * FROM customer WHERE email='$username' and pass='$password'";
