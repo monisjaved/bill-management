@@ -22,14 +22,15 @@ if($logged!=true)
 		$password = mysql_real_escape_string($password);
 		$sql="SELECT * FROM admin WHERE username='$username' and pass='$password'";
 		$result=mysql_query($sql);
-
+		$row = mysql_fetch_array($result);
 		$count=mysql_num_rows($result);
 		if($count==1)
 		{
 			$_SESSION['logged']=true;
 			$_SESSION['user']=$username;
 			$_SESSION['account']="admin";
-			header("Location:admin/index.php");
+			$_SESSION['perm']=$row['permission'];
+			header("Location:admindashboard.php");
 
 		}
 ?>

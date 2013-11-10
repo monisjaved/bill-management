@@ -1,12 +1,12 @@
 <?php
+
 session_start();
 
-if($_SESSION['logged']!=true || $_SESSION['account']!="customer"){
+if($_SESSION['logged']!=true || $_SESSION['account']!="admin")
 	header("Location:index.php");
-}
-else $logged=false;
 
 
+//echo "Hello Admin";
 ?>
 <html>
 <head> 
@@ -43,18 +43,24 @@ body {
 	background-color: #47a447;
 }
 </style>
+<script>
+function logout()
+{
+window.location = "../edbms/logout.php";
+}
+</script>
 
 <script type="text/javascript">
 var scripts = new Array();
 scripts[0] = "";
-scripts[1] = "customer/paybill.php";
-scripts[2] = "customer/viewbills.php";
-scripts[3] = "customer/profile.php";
-scripts[4] = "customer/complaint.php";
-scripts[5] = "customer/deactivate.php";
-scripts[6] = "customer/terminate.php";
-function chosen (id) {
-
+scripts[1] = "admin/admin.php";
+scripts[2] = "admin/customer.php";
+scripts[3] = "admin/bill.php";
+scripts[4] = "admin/complaint.php";
+scripts[5] = "admin/deactivate.php";
+scripts[6] = "admin/terminate.php";
+function chosen (id) 
+{
 	for(i=1;i<=6;++i) $("#lc"+i).removeClass('active');
 
 	$("#dash-choices").slideUp("slow");
@@ -63,19 +69,11 @@ function chosen (id) {
 	$("#lc"+id).addClass('active');
 	$("#content").slideDown("slow");
 
-	$.get(scripts[id],function(data,status){
+	$.get(scripts[id],function(data,status)
+	{
     //alert("Data: " + data + "\nStatus: " + status);
   	$("#content").html(data);
-  });
-
-
-	
-}
-</script>
-<script>
-function logout()
-{
-window.location = "logout.php";
+	});	
 }
 </script>
 
@@ -97,7 +95,7 @@ window.location = "logout.php";
         </div>
         <div class="navbar-collapse collapse">
 <?php
-    	echo "<span class=\"navbar-brand navbar-right\">Welcome ".$_SESSION['test'].'  '.'<button type="button" class="btn btn-success" value="Click me" onclick="logout()">Sign out</button>'."</span>";
+    	echo "<span class=\"navbar-brand navbar-right\">Welcome ".$_SESSION['user'].'  '.'<button type="button" class="btn btn-success" value="Click me" onclick="logout()">Sign out</button>'."</span>";
 ?>
         </div><!--/.navbar-collapse -->
       </div>
@@ -108,17 +106,17 @@ window.location = "logout.php";
     	<div>
     	<a href ="#" style="color:black" onclick="chosen(1);" >
 	    	<div id ="c1" class="choice">   
-	    		Pay Pending Bill
+	    		Manage Admin Roles
 	    	</div>
 	    </a>
     	<a href ="#" style="color:black" onclick="chosen(2);" >
 	    	<div id ="c1" class="choice"> 
-	    		View Monthly Bills
+	    		Pending Customer Approvals
 	    	</div>
     	</a>
     	<a href ="#" style="color:black" onclick="chosen(3);" >
 	    	<div id ="c1" class="choice">
-	    		Update Profile
+	    		Edit Bills
 	    	</div>
     	</a>
     	<br/>
@@ -143,16 +141,17 @@ window.location = "logout.php";
     </div>
 
     <div id="list-options" class="list-group" style="width:250px; float:left; display:none; margin-left: 1%; margin-top: 2%;">
-	  <a href="#" id="lc1" class="list-group-item" onclick="chosen(1);">Pay Pending Bill</a>
-	  <a href="#" id="lc2" class="list-group-item" onclick="chosen(2);">View Monthly Bills</a>
-	  <a href="#" id="lc3" class="list-group-item" onclick="chosen(3);">Update Profile</a>
+	  <a href="#" id="lc1" class="list-group-item" onclick="chosen(1);">Manage Admin Roles</a>
+	  <a href="#" id="lc2" class="list-group-item" onclick="chosen(2);">Pending Customer Approvals</a>
+	  <a href="#" id="lc3" class="list-group-item" onclick="chosen(3);">Edit Bills</a>
 	  <a href="#" id="lc4" class="list-group-item" onclick="chosen(4);">Complaints </a>
 	  <a href="#" id="lc5" class="list-group-item" onclick="chosen(5);">Deactivate Connection</a>
 	  <a href="#" id="lc6" class="list-group-item" onclick="chosen(6);">Terminate Connection </a>
 	</div>
 
 	<div id="content" style="float:left; display:none;" >
-vg
+	<?echo "HI";?>
+
 
 	</div>
 
