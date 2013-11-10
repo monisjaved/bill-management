@@ -14,7 +14,9 @@ if (strpos($_SESSION['perm'], 'w') !== false)
 	$sql="SELECT * FROM customer WHERE status='INACTIVE'";
 	$result=mysql_query($sql);
 ?>
-	<form action="" method="POST">
+	<div class="panel panel-default" style="width: 700px;">
+  <div class="panel-heading"><b>Pending Customer Approvals</b></div>
+	<form action="customersubmit.php" method="POST">
 	<table class="table">
         <thead>
           <tr>
@@ -42,26 +44,9 @@ if (strpos($_SESSION['perm'], 'w') !== false)
     </table>
 	<button type="submit" class="btn btn-lg btn-success" value="submit">Save Changes</button>
 	</form>
+	</div>
+	</div>
 <?php
-if (isset($_POST["submit"])) 
-{
-	if ($_SERVER["REQUEST_METHOD"] == "POST") 
-	{
-		foreach($_POST['user'] as $user)
-		{
-			$a="INACTIVE";
-			$user=$_POST['user'];
-			$email=$_post['email'];
-			if(isset($_POST['app']))
-			{
-				$a = "ACTIVE";
-			}
-			$sql = "UPDATE customer SET status='$a' WHERE username='$user' AND email='$email'";
-			$result=mysql_query($sql);
-		}
-	}
-}
-	
 }
 else
 {
