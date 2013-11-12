@@ -1,11 +1,11 @@
 <html>
-<link href="../../edbms/bootstrap/dist/css/bootstrap.css" rel="stylesheet"> 
+<link href="../bootstrap/dist/css/bootstrap.css" rel="stylesheet"> 
 <script>
     $(function js() {
         $('form#person').on('submit', function(e) {
             $.ajax({
                 type: 'post',
-                url: 'adminsubmit.php',
+                url: 'admin/adminsubmit.php',
                 data: $(this).serialize(),
                 success: function (o) {
                          // =====>    console.log(o); <=== I TRIED DOING THIS BUT NOTHING IS PRINTED
@@ -40,6 +40,7 @@ if(file_exists('../config.php'))
 {
 	include '../config.php';
 }
+
 if (strpos($_SESSION['perm'], 'x') !== false)
 {
 	if (isset($_POST["submit"])) 

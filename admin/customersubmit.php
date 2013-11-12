@@ -3,6 +3,7 @@
 	{
 		include '../config.php';
 	}
+
 	if ($_SERVER["REQUEST_METHOD"] == "POST") 
 	{
 		if(isset($_POST['user']))
@@ -12,14 +13,16 @@
 			for($i=0;$i<$cnt;$i++)
 			{
 				$a="INACTIVE";
-				$user=$_POST['user'];
-				$email=$_post['email'];
-				if(isset($_POST['app']))
+				$email=$_POST['email'][$i];
+				if(isset($_POST['app'][$i]))
 				{
 					$a = "ACTIVE";
 				}
-				$sql = "UPDATE customer SET status='$a' WHERE username='$user' AND email='$email'";
+				$sql = "UPDATE customer SET status='$a' WHERE email='$email'";
 				$result=mysql_query($sql);
+				
 			}
+		}
 	}
-	
+?>
+<script type="text/javascript"> window.location='../admindashboard.php';</script>	

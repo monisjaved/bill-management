@@ -14,9 +14,9 @@ if (strpos($_SESSION['perm'], 'w') !== false)
 	$sql="SELECT * FROM customer WHERE status='INACTIVE'";
 	$result=mysql_query($sql);
 ?>
-	<div class="panel panel-default" style="width: 700px;">
+	<div class="panel panel-default" style="">
   <div class="panel-heading"><b>Pending Customer Approvals</b></div>
-	<form action="customersubmit.php" method="POST">
+	<form action="admin/customersubmit.php" method="POST">
 	<table class="table">
         <thead>
           <tr>
@@ -32,10 +32,10 @@ if (strpos($_SESSION['perm'], 'w') !== false)
 	while($row = mysql_fetch_array($result))
 	{
         echo '<tr>';
-        echo '<td><input type="text" value="'.$row['name'].'" name="user[]" readonly></td>';
-        echo '<td><input type="text" value="'.$row['email'].'" name="email[]" readonly></td>';
-		echo '<td><input type="text" value="'.$row['phone'].'" name="phone[]" readonly></td>';
-		echo '<td><input type="text" value="'.$row['address'].'" name="address[]" readonly></td>';
+        echo '<td><input type="text" value="'.$row['name'].'" name="user[]" readonly class="form-control"></td>';
+        echo '<td><input type="text" value="'.$row['email'].'" name="email[]" readonly class="form-control"></td>';
+		echo '<td><input type="text" value="'.$row['phone'].'" name="phone[]" readonly class="form-control"></td>';
+		echo '<td><input type="text" value="'.$row['address'].'" name="address[]" readonly class="form-control"></td>';
 		echo '<td><input type="checkbox" name="app[]" value="r"></td>';
         echo '</tr>';
     }

@@ -1,35 +1,25 @@
 <?php
 session_start();
-$logged = false;
-
+$logged=false;
+$forgot=false;
 if(isset($_SESSION['logged']))
-<<<<<<< HEAD
 	if($_SESSION['logged']==true)
 	{
 		$logged=true;
 		$user=$_SESSION['user'];
-		if($_SESSION['account'] == "admin")
-		{
-			//header("Location:admindashboard.php");
-		}
-		if($_SESSION['account'] == "customer")
-		{
-			header("Location:dashboard.php");
-		}
-=======
-	if($_SESSION['logged']==true){
-		$logged=true;
-		$user=$_SESSION['user'];
->>>>>>> e0f4055f0ae336b88247f5fb7e05556f887e0034
 	}
 else $logged=false;
 
 $auth=true;
-if($logged!=true){
+if($logged!=true)
+{
+	$user = "";
 	include "config.php";
-	if(isset($_POST['username']) && isset($_POST['pass'])){
+	if(isset($_POST['username']) && isset($_POST['pass']))
+	{
 
 		$username=$_POST['username']; 
+		$user = $username;
 		$password=$_POST['pass']; 
 		//echo $username." ".$password;
 		$username = stripslashes($username);
@@ -38,17 +28,10 @@ if($logged!=true){
 		$password = mysql_real_escape_string($password);
 		$sql="SELECT * FROM admin WHERE username='$username' and pass='$password'";
 		$result=mysql_query($sql);
-<<<<<<< HEAD
-		$row=mysql_fetch_array($result);
-
 		$count=mysql_num_rows($result);
-		if($count==1){
-=======
-
-		$count=mysql_num_rows($result);
-		if($count==1){
+		if($count==1)
+		{
 			$row = mysql_fetch_array($result);
->>>>>>> e0f4055f0ae336b88247f5fb7e05556f887e0034
 			$_SESSION['logged']=true;
 			$_SESSION['user']=$username;
 			$_SESSION['account']="admin";
@@ -56,7 +39,7 @@ if($logged!=true){
  	      	header("Location:admindashboard.php");
 		}
 
-		$sql="SELECT * FROM customer WHERE email='$username' and pass='$password'";
+		$sql="SELECT * FROM customer WHERE email='$username' and pass='$password' and status='ACTIVE'";
 		$result=mysql_query($sql);
 		$count=mysql_num_rows($result);	
 
@@ -76,43 +59,22 @@ if($logged!=true){
 
 <html>
 <head> 
-<title> Eletricity Billing Management System </title>
+<title> Electricity Billing Management System </title>
 <script src="js/jquery.js"></script>
-<<<<<<< HEAD
-<script>
-function prf(a)
-{
-if(a == "customer")
-{
-	window.location = "dashboard.php";
-}
-if(a == "admin")
-{
-	window.location = "admindashboard.php";
-}
-}
-</script>
-<script>
-function logout()
-{
-window.location = "logout.php";
-}
-</script>
 <script src="bootstrap/dist/js/bootstrap.min.js"></script>
-=======
-<script src="bootstrap/dist/js/bootstrap.min.js"></script>
-
-<link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
->>>>>>> e0f4055f0ae336b88247f5fb7e05556f887e0034
 
 <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 
 </head>
 
+
 <body>
 <?php
 	if($auth==false) 
-		echo '<script type="text/javascript"> alert("Wrong username pass combination");</script>'	
+	{
+		echo '<script type="text/javascript"> alert("Wrong username pass combination");</script>';	
+		$forgot = true;
+	}
 ?>
 	<div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -122,47 +84,60 @@ window.location = "logout.php";
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Electricity Billing System</a>
-        </div>
-        <div class="navbar-collapse collapse">
+		  <?php
+		  if(!isset($_SESSION['user']))
+		  {
+			?>
+			<a class="navbar-brand" href="#">Electricity Billing System</a>
+	      <?php
+		  }
+		  else
+		  {
+		   ?>
+          <a class="navbar-brand" href="<?php echo (($_SESSION['account'] == 'customer')?'./dashboard.php':'./admindashboard.php');?>">Electricity Billing System</a>
+        
 <?php
-   	if($logged!=true){
+		   }
+		   echo '</div>';
+		   echo '<div class="navbar-collapse collapse">';
+   	if(!isset($_SESSION['user']))
+	{
 ?>
           <form method="post" class="navbar-form navbar-right">
             <div class="form-group">
-              <input type="text" name="username" placeholder="Email" class="form-control">
+              <input type="text" name="username" placeholder="Email" value="<?php echo $user; ?>" class="form-control">
             </div>
             <div class="form-group">
               <input type="password" name="pass" placeholder="Password" class="form-control">
             </div>
             <button type="submit" class="btn btn-success">Sign in</button>
            <button type="button" class="btn btn-success" value="Click me" onclick="window.location = 'signup.php';">Sign up</button>
+<?php
+		if($forgot == true)
+		{
+?>
+			<button type="button" class="btn btn-success" value="Click me" onclick="window.location = 'forgot.php?user=<?php echo $user; ?>';">Forgot?</button>
           </form>
 <?php
-    }else{
-
-<<<<<<< HEAD
-    	echo "<span class=\"navbar-brand navbar-right\">Welcome $user  ".'<button type="button" class="btn btn-success" value="Click me" onclick="prf(\''.$_SESSION['account'].'\')">Dashboard</button>'.'  '.'<button type="button" class="btn btn-success" value="Click me" onclick="logout()">Sign out</button>'."</span>";
-=======
+		}
+    }else
+	{
     	echo "<span class=\"navbar-brand navbar-right\">Welcome $user </span>";
->>>>>>> e0f4055f0ae336b88247f5fb7e05556f887e0034
     }
 ?>
         </div><!--/.navbar-collapse -->
       </div>
     </div>
 <?php
-<<<<<<< HEAD
-	
-=======
-	if($logged==true){
+	if($logged==true)
+	{
     	echo "<button type=\"button\" class=\"btn btn-success\" style=\"float:right; margin-top: 52px;\" value=\"Click me\" onclick=\"window.location = 'logout.php'\">Sign out</button>";
     }	
->>>>>>> e0f4055f0ae336b88247f5fb7e05556f887e0034
 ?>
 <center>
 <img style="width:850px; padding-top: 75px;" src="images/bulb.jpg"/>
 </center>
+<?php include "footer.php"; ?>
 </body>
 
 

@@ -1,41 +1,41 @@
 <?php
 session_start();
-if(isset($_SESSION['logged'])){
-  if($_SESSION['logged']==true){
-    header("Location:index.php");
-  }
+if(isset($_SESSION['logged']))
+{
+	if($_SESSION['logged']==true)
+	{
+		header("Location:index.php");
+	}
 }
-
-  if(isset($_POST['username']) && isset($_POST['pass'])){
-    include "config.php";
-
-    $username=$_POST['username']; 
-    $password=$_POST['pass']; 
-    $username = stripslashes($username);
-    $password = stripslashes($password);
-    $username = mysql_real_escape_string($username);
-    $password = mysql_real_escape_string($password);
-    $sql="SELECT * FROM admin WHERE username='$username' and pass='$password'";
-    $result=mysql_query($sql);
-
-    $count=mysql_num_rows($result);
-    if($count==1){
-      $_SESSION['logged']=true;
-      $_SESSION['user']=$username;
-      $_SESSION['account']="admin";
-      header("Location:admin/index.php");
-    }
-
-    $sql="SELECT * FROM customer WHERE email='$username' and pass='$password'";
-    $result=mysql_query($sql);
-
-    $count=mysql_num_rows($result); 
-    if($count==1){
-      $_SESSION['logged']=true;
-      $_SESSION['user']=$username;
-      $_SESSION['account']="customer";
-      header("Location:dashboard.php");
-    }
+	if(isset($_POST['username']) && isset($_POST['pass']))
+	{
+		include "config.php";
+		$username=$_POST['username']; 
+		$password=$_POST['pass']; 
+		$username = stripslashes($username);
+		$password = stripslashes($password);
+		$username = mysql_real_escape_string($username);
+		$password = mysql_real_escape_string($password);
+		$sql="SELECT * FROM admin WHERE username='$username' and pass='$password'";
+		$result=mysql_query($sql);
+		$count=mysql_num_rows($result);
+		if($count==1)
+		{
+		  $_SESSION['logged']=true;
+		  $_SESSION['user']=$username;
+		  $_SESSION['account']="admin";
+		  header("Location:admin/index.php");
+		}
+		$sql="SELECT * FROM customer WHERE email='$username' and pass='$password' and status='ACTIVE'";
+		$result=mysql_query($sql);
+		$count=mysql_num_rows($result); 
+		if($count==1)
+		{
+		  $_SESSION['logged']=true;
+		  $_SESSION['user']=$username;
+		  $_SESSION['account']="customer";
+		  header("Location:dashboard.php");
+		}
   }
 
 ?>
@@ -95,7 +95,7 @@ body {
 
 
 <body>
-  <div class="container">
+	<div class="container">
 
       <form method="post" class="form-signin">
         <h2 class="form-signin-heading">Please sign in</h2>
@@ -106,7 +106,7 @@ body {
 
     </div>
 
-
+<h1></h1><h1></h1><h1></h1><?php include "footer.php"; ?>
 </body>
 
 

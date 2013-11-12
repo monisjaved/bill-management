@@ -1,4 +1,13 @@
+<script >
+function pay(){
+	window.location.replace("./transaction/transaction.php");
+}
+</script>
 
+
+
+
+<button type="button" class="btn btn-primary" style="margin-bottom:5px;" id="pay" onclick="pay();">Pay Bill</button>
 
 <div class="panel panel-default" style="width: 700px;">
   <div class="panel-heading"><b>Pending Electricity Bills</b></div>

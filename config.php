@@ -1,7 +1,7 @@
 <?php
 $host="localhost";
-$mysql_user="monis";
-$mysql_pwd="root";
+$mysql_user="root";
+$mysql_pwd="";
 $dbms="edbms";
 $con = mysql_connect($host,$mysql_user,$mysql_pwd);
 if (!$con) die('Could not connect: ' . mysql_error());

@@ -61,8 +61,8 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 	if ($x[0]=="address") {
 		exit();
 	}
-	
-	$result=mysql_query("update customer set ".$x[0]." = '".$_POST[$x[0]]."'");
+	echo "update customer set ".$x[0]." = '".$_POST[$x[0]]."' where email='".$_SESSION['user']."'";
+	$result=mysql_query("update customer set ".$x[0]." = '".$_POST[$x[0]]."' where email='".$_SESSION['user']."'");
 	if ($x[0]=="email") {
 		$_SESSION['user']=$_POST[$x[0]];
 	}
@@ -76,6 +76,8 @@ $row=mysql_fetch_array($result);
 
 <script type="text/javascript">
 
+var sent=0;
+
 function send_data(attr){
 
 	var data = {};
@@ -83,10 +85,17 @@ function send_data(attr){
 	data[attr]=value;
 	
 	
-
+	++sent;
+	$("#"+attr+"_pic").hide();
+	console.log(sent);
   	$.post("customer/profile.php",data,
 		function(result){
-			$("#"+attr+"_pic").show();
+			--sent;
+			if(sent==0){
+				$("#"+attr+"_pic").show();
+			}else
+				$("#"+attr+"_pic").hide();
+				
 			setTimeout(function(){$("#"+attr+"_pic").hide()},3000);
 
   		}
@@ -112,26 +121,26 @@ function change_type () {
 <form role="form">
   <div class="form-group">
     <label for="name">Name</label>
-    <img src="../images/green_tick.png" id="name_pic" style="display:none;">
+    <img src="images/green_tick.png" id="name_pic" style="display:none;">
     <input type="text" onkeyup="send_data('name');" class="form-control mytext" id="name" size="40" value="<?php echo $row['name']; ?>">
   </div>
   
   <div class="form-group">
     <label for="email">Email address</label>
-    <img src="../images/green_tick.png" id="email_pic" style="display:none;">
+    <img src="images/green_tick.png" id="email_pic" style="display:none;">
     <input type="email" onkeyup="send_data('email');" class="form-control mytext" id="email" size="40" value="<?php echo $row['email']; ?>" >
   	
   </div>
   
   <div class="form-group">
     <label for="phone">Phone</label>
-    <img src="../images/green_tick.png" id="phone_pic" style="display:none;">
+    <img src="images/green_tick.png" id="phone_pic" style="display:none;">
     <input type="text" onkeyup="send_data('phone');" class="form-control mytext" id="phone" value="<?php echo $row['phone']; ?>" >
   </div>
   
   <div class="form-group">
     <label for="pass">Password</label>
-    <img src="../images/green_tick.png" id="pass_pic" style="display:none;">
+    <img src="images/green_tick.png" id="pass_pic" style="display:none;">
     <input type="password" onkeyup="send_data('pass');" class="form-control mytext" id="pass" value="<?php echo $row['pass']; ?>">
   </div>
   <div class="checkbox">

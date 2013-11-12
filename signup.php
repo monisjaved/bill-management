@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-
+$nameErr = $phoneErr = $addrErr = $emailErr = $passwordErr = $confpasswordErr = "";
 include "config.php";
 $flag=0;
 if ($_SERVER["REQUEST_METHOD"] == "POST") 
@@ -27,12 +27,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		{
 			if(is_numeric($_POST['phone']))
 			{
-				$phonee = $_POST["phone"];
+				$phone = $_POST["phone"];
 			}
 			else
 			{
 				$phoneErr = "Phone number can contain only numbers";
 				$flag=1;
+			}
+		}
+		if (!isset($_POST["pass"])) 
+		{
+			$passwordErr = "missing";
+			$flag=1;
+		}
+		else 
+		{
+			$password = $_POST["pass"];
+		}
+	 		
+		if (empty($_POST["confpass"])) 
+		{
+			$confpasswordErr = "missing";
+			$flag=1;
+		}
+		else 
+		{
+			if($_POST['confpass'] == $password)
+			{
+				$confpassword = $_POST["confpass"];
+			}
+			else
+			{
+				$confpasswordErr = "not same as password";
+				$flag = 1;
 			}
 		}
 		
@@ -61,12 +88,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 			}
 			else
 			{
+				$emailErr = "Invalid Mail";
 				$flag=1;
 			}
 		}
 		
 	 
-		if (!isset($_POST["pass"])) 
+		/*if (!isset($_POST["pass"])) 
 		{
 			$passwordErr = "missing";
 			$flag=1;
@@ -92,10 +120,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 				$confpassword = "not same as password";
 				$flag = 1;
 			}
-		}
-		
+		}*/
+		//echo $flag;
 		if($flag == 0)
 		{
+
 			include "config.php";
 			$sql = "INSERT INTO customer (name,email,phone,pass,status,address)
 							VALUES ('$name','$email','$phone','$password','INACTIVE','$address')";
@@ -155,6 +184,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		</div>
 	</form>
 </div>
+<?php include "footer.php"; ?>
 </body>
 
 

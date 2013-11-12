@@ -82,8 +82,6 @@ function chosen (id) {
 
 <body>
 
-
-
 	<div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -133,7 +131,7 @@ function chosen (id) {
     	</a>
     	<a href ="#" style="color:black" onclick="chosen(5);" >
 	    	<div id ="c1" class="choice">
-	    		Deactivate Connection 
+	    		About Us
 	    	</div>
     	</a>
     	<a href ="#" style="color:black" onclick="chosen(6);" >
@@ -142,22 +140,24 @@ function chosen (id) {
 	    	</div>
     	</a>
     	</div>
+		
     </div>
 
-    <div id="list-options" class="list-group" style="width:250px; float:left; display:none; margin-left: 1%; margin-top: 2%; ont-weight: normal; font-family: Conv_rubrik_medium;font-size: 15px;">
+    <div id="list-options" class="list-group" style="width:250px; float:left; display:none; margin-left: 1%; margin-top: 2%; font-weight: normal; font-family: Conv_rubrik_medium;font-size: 15px;">
 	  <a href="#" id="olc1" class="list-group-item" onclick="chosen(1);"> <div id="lc1" >Pay Pending Bill</div></a>
 	  <a href="#" id="olc2" class="list-group-item" onclick="chosen(2);"><div id="lc2" >View Monthly Bills</div></a>
 	  <a href="#" id="olc3" class="list-group-item" onclick="chosen(3);"><div id="lc3" >Update Profile</div></a>
 	  <a href="#" id="olc4" class="list-group-item" onclick="chosen(4);"><div id="lc4" >Complaints </div></a>
-	  <a href="#" id="olc5"class="list-group-item" onclick="chosen(5);"><div id="lc5" >Deactivate Connection</div></a>
+	  <a href="#" id="olc5"class="list-group-item" onclick="chosen(5);"><div id="lc5" >About Us</div></a>
 	  <a href="#" id="olc6" class="list-group-item" onclick="chosen(6);"><div id="lc6" >Terminate Connection </div></a>
+	  
 	</div>
 
-	<div id="content" style="float:left; display:none;padding-left: 21px; padding-top: 27px;
-}" >
+	<div id="content" style="float:left; display:none;padding-left: 21px; padding-top: 27px;" >
 
-
+	
 	</div>
-
+	<?php //include "footer.php"; ?>
+	
 </body>
 </html>

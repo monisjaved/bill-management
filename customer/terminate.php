@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-Terminate Your Account
-=======
 <?php
 
 session_start();
@@ -61,4 +58,3 @@ function c_pass () {
 	echo "Your Customer account is currently in the state <span style=\"color:red;\"><b>".$row['status']."</b></span>";
 }
 ?>
->>>>>>> e0f4055f0ae336b88247f5fb7e05556f887e0034
